@@ -18,9 +18,13 @@ import matchRouter from "./routes/match.router.js";
 const app = express();
 // Middleware
 const corsOptions = {
-  origin: process.env.CORS_URL, // Replace with your frontend URL *process.env.CORS_URL*
-  credentials: true, // Allow cookies
+  origin: [process.env.CORS_URL, "https://c-front-blond.vercel.app"], // Add your frontend URL explicitly
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+app.use(cors(corsOptions));
+
 app.use(cors(corsOptions)); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse incoming JSON requests
 app.use(cookieParser());
